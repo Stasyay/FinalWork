@@ -1,8 +1,25 @@
-﻿Console.WriteLine("Введите строки (для завершения нажмите Enter):");
+﻿string[] GetShortWordsArray(string[] array)
+{
+    string[] resultArr = new string[array.Length];
+    int count = 0;
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i].Length <= 3) 
+        {
+        resultArr[count] = array[i];
+        count++;
+        }
+    }
+    Array.Resize(ref resultArr, count);
+    return resultArr;
+}
+
+
+Console.WriteLine("Введите строки (для завершения нажмите Enter):");
 
 int count = 0;
-string[] ArrString = new string[count];
-string s;
+string[] arrString = new string[count];
+string s = "";
 do
 {
     s = Console.ReadLine();
@@ -10,16 +27,17 @@ do
     if (s != "")
     {
         count++;
-        string[] ArrString2 = new string[count];
+        string[] arrStringNew = new string[count];
 
-        for (int i = 0; i < ArrString2.Length - 1; i++)
-            ArrString2[i] = ArrString[i];
+        for (int i = 0; i < arrStringNew.Length - 1; i++)
+            arrStringNew[i] = arrString[i];
 
-        ArrString2[count - 1] = s;
+        arrStringNew[count - 1] = s;
 
-        ArrString = ArrString2;
+        arrString = arrStringNew;
     }
 }
 while (s != "");
 
-Console.WriteLine("[" + string.Join(", ", ArrString) + "]");
+GetShortWordsArray(arrString);
+Console.WriteLine("[" + string.Join(", ", GetShortWordsArray(arrString)) + "]");
